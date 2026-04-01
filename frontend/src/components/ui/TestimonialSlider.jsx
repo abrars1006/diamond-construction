@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FaStar } from 'react-icons/fa';
 
 const testimonials = [
@@ -36,40 +35,96 @@ const TestimonialSlider = () => {
     return () => clearInterval(timer);
   }, []);
 
-  return (
-    <div className="relative overflow-hidden w-full max-w-4xl mx-auto min-h-[250px] flex items-center justify-center">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.5 }}
-          className="text-center px-4 md:px-12"
-        >
-          <div className="flex justify-center mb-6">
-             {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                <FaStar key={i} className="text-primary mx-1" size={24} />
-             ))}
-          </div>
-          <p className="text-xl md:text-3xl font-heading text-light leading-relaxed mb-8 italic">
-            "{testimonials[currentIndex].content}"
-          </p>
-          <div>
-            <h4 className="font-bold text-light text-lg">{testimonials[currentIndex].name}</h4>
-            <span className="text-light/50 text-sm">{testimonials[currentIndex].role}</span>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+  const t = testimonials[currentIndex];
 
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-3">
+  return (
+    <div style={{ fontFamily: 'Tahoma', fontSize: '11px' }}>
+      {/* Testimonial display as a Windows dialog message box */}
+      <div
+        className="win-inset"
+        style={{
+          padding: '12px 16px',
+          background: '#ffffff',
+          textAlign: 'center',
+          minHeight: '120px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {/* Stars */}
+        <div style={{ marginBottom: '6px' }}>
+          {[...Array(t.rating)].map((_, i) => (
+            <FaStar key={i} style={{ color: '#DAA520', marginRight: '2px', fontSize: '14px' }} />
+          ))}
+        </div>
+
+        {/* Quote */}
+        <p
+          style={{
+            color: '#000',
+            fontSize: '12px',
+            lineHeight: '1.7',
+            fontStyle: 'italic',
+            maxWidth: '520px',
+            marginBottom: '8px',
+          }}
+        >
+          &ldquo;{t.content}&rdquo;
+        </p>
+
+        {/* Attribution */}
+        <div style={{ borderTop: '1px solid #d4d0c8', paddingTop: '6px', width: '100%', maxWidth: '300px' }}>
+          <strong style={{ color: '#000080' }}>{t.name}</strong>
+          <br />
+          <span style={{ color: '#808080', fontSize: '10px' }}>{t.role}</span>
+        </div>
+      </div>
+
+      {/* Navigation (radio-button style) */}
+      <div
+        style={{
+          display: 'flex',
+          gap: '8px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '8px',
+        }}
+      >
+        <button
+          className="win-btn"
+          style={{ padding: '2px 8px', fontSize: '10px', minWidth: 'auto' }}
+          onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+        >
+          ◄ Prev
+        </button>
         {testimonials.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className={`w-3 h-3 rounded-full transition-colors ${idx === currentIndex ? 'bg-primary' : 'bg-white/20'}`}
+            style={{
+              width: '14px',
+              height: '14px',
+              borderRadius: '50%',
+              border: '2px solid #808080',
+              background: idx === currentIndex ? '#000080' : '#d4d0c8',
+              cursor: 'pointer',
+              padding: 0,
+            }}
+            title={`Review ${idx + 1}`}
           />
         ))}
+        <button
+          className="win-btn"
+          style={{ padding: '2px 8px', fontSize: '10px', minWidth: 'auto' }}
+          onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
+        >
+          Next ►
+        </button>
+      </div>
+      <div style={{ textAlign: 'center', color: '#808080', fontSize: '10px', marginTop: '4px' }}>
+        Review {currentIndex + 1} of {testimonials.length}
       </div>
     </div>
   );

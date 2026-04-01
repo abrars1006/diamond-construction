@@ -13,45 +13,412 @@
   --background-image-hero-pattern: url('/images/hero-bg.jpg');
 }
 
-@layer base {
-  body {
-    @apply bg-dark text-light font-sans antialiased overflow-x-hidden;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-tight;
-  }
+/* ===== WINDOWS 2000 GLOBAL THEME ===== */
+
+* {
+  box-sizing: border-box;
 }
 
-@layer components {
-  .btn-primary {
-    @apply px-6 py-3 bg-primary text-dark font-semibold rounded-md transition-all duration-300 hover:bg-primary-hover hover:shadow-lg hover:shadow-primary/30 active:scale-95;
-  }
-  
-  .btn-outline {
-    @apply px-6 py-3 border-2 border-primary text-primary font-semibold rounded-md transition-all duration-300 hover:bg-primary hover:text-dark hover:shadow-lg hover:shadow-primary/30 active:scale-95;
-  }
-
-  .premium-card {
-    @apply bg-dark-card border border-white/5 rounded-xl overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2;
-  }
-
-  .glass-panel {
-    @apply bg-black/40 backdrop-blur-md border border-white/10;
-  }
+body {
+  background-color: #008080 !important;
+  background-image: none !important;
+  font-family: "Tahoma", "Arial", sans-serif !important;
+  font-size: 11px;
+  color: #000000;
+  overflow-x: hidden;
+  cursor: default;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
+/* Win2k Scrollbar */
+::-webkit-scrollbar { width: 16px; height: 16px; }
+::-webkit-scrollbar-track { background: #d4d0c8; }
 ::-webkit-scrollbar-thumb {
-  background: #DAA520;
-  border-radius: 4px;
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #B8860B;
+::-webkit-scrollbar-button:vertical:start:decrement {
+  background: #d4d0c8;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+}
+
+/* ===== WIN2K COMPONENT CLASSES ===== */
+
+.win-window {
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.win-inset {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  background: #ffffff;
+}
+
+.win-titlebar {
+  background: linear-gradient(to right, #0a246a, #a6caf0);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.win-titlebar-btn {
+  width: 16px;
+  height: 14px;
+  background: #d4d0c8;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  font-size: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 2px;
+  color: #000;
+}
+
+.win-btn {
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  font-family: "Tahoma", "Arial", sans-serif;
+  font-size: 11px;
+  padding: 4px 12px;
+  cursor: pointer;
+  color: #000000;
+  min-width: 75px;
+  text-align: center;
+  display: inline-block;
+}
+
+.win-btn:active {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  padding: 5px 11px 3px 13px;
+}
+
+.win-btn:hover {
+  background: #e8e8e0;
+}
+
+.win-btn-primary {
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  border: 2px solid #000000;
+  font-family: "Tahoma", "Arial", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 12px;
+  cursor: pointer;
+  color: #000000;
+  min-width: 75px;
+  text-align: center;
+  display: inline-block;
+  outline: 1px dotted #000;
+  outline-offset: -3px;
+}
+
+.win-btn-primary:active {
+  padding: 5px 11px 3px 13px;
+}
+
+.win-menubar {
+  background: #d4d0c8;
+  border-bottom: 1px solid #808080;
+  padding: 2px 4px;
+  display: flex;
+  gap: 2px;
+}
+
+.win-menuitem {
+  font-family: "Tahoma", "Arial", sans-serif;
+  font-size: 11px;
+  padding: 2px 6px;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+}
+
+.win-menuitem:hover {
+  background: #0a246a;
+  color: #ffffff;
+}
+
+.win-menuitem.active {
+  background: #0a246a;
+  color: #ffffff;
+}
+
+.win-statusbar {
+  background: #d4d0c8;
+  border-top: 1px solid #808080;
+  padding: 2px 8px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.win-statusbar-panel {
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  padding: 1px 6px;
+}
+
+.win-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  margin: 4px 0;
+}
+
+.win-label {
+  font-family: "Tahoma", "Arial", sans-serif;
+  font-size: 11px;
+  color: #000;
+}
+
+.win-heading {
+  font-family: "Tahoma", "Arial", sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000080;
+  text-shadow: none;
+}
+
+.win-link {
+  color: #0000ee;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 11px;
+}
+.win-link:hover {
+  color: #ee0000;
+}
+.win-link:visited {
+  color: #551a8b;
+}
+
+.win-table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #ffffff;
+}
+.win-table th {
+  background: #d4d0c8;
+  border: 1px solid #808080;
+  padding: 3px 8px;
+  font-family: "Tahoma";
+  font-size: 11px;
+  font-weight: bold;
+  text-align: left;
+}
+.win-table td {
+  border: 1px solid #d4d0c8;
+  padding: 3px 8px;
+  font-family: "Tahoma";
+  font-size: 11px;
+}
+.win-table tr:hover td {
+  background: #0a246a;
+  color: #ffffff;
+}
+
+.win-progress {
+  background: #ffffff;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  height: 14px;
+  overflow: hidden;
+}
+
+.win-progress-bar {
+  height: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    #0a246a 0px,
+    #0a246a 9px,
+    #d4d0c8 9px,
+    #d4d0c8 11px
+  );
+  width: 0%;
+  transition: width 2s;
+}
+
+/* Taskbar */
+.win-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+}
+
+.win-start-btn {
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  font-family: "Tahoma", "Arial", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 60px;
+  height: 22px;
+  color: #000;
+}
+
+.win-start-btn:hover {
+  background: #e4e0d8;
+}
+
+/* Blinking cursor / construction animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.win-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.win-marquee-text {
+  animation: marquee 12s linear infinite;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* IE-style hover buttons */
+a, button {
+  transition: none !important;
+}
+
+/* Remove modern effects */
+.win-no-modern {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
+}
+
+/* Explorer Address Bar */
+.win-address-bar {
+  background: #ffffff;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  font-family: "Tahoma";
+  font-size: 11px;
+  padding: 2px 4px;
+  flex: 1;
+}
+
+/* Tooltip-style hover */
+.win-tooltip {
+  position: relative;
+}
+
+.win-tooltip:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffe1;
+  border: 1px solid #000;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-family: Tahoma;
+  white-space: nowrap;
+  z-index: 1000;
+  color: #000;
+  pointer-events: none;
+}
+
+.win-icon-img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Section separator */
+.win-section-border {
+  border: none;
+  border-top: 2px solid #808080;
+  border-bottom: 2px solid #ffffff;
+}
+
+/* Main content area background */
+.win-content-bg {
+  background: #d4d0c8;
+}
+
+/* Under construction gif mimicry */
+@keyframes construction-pulse {
+  0%, 100% { background-color: #ffff00; }
+  50% { background-color: #ff8000; }
+}
+
+.win-construction-banner {
+  animation: construction-pulse 0.6s ease-in-out infinite;
+  color: #000;
+  font-weight: bold;
+  font-family: Tahoma;
+  text-align: center;
+  padding: 2px 0;
+  font-size: 11px;
+}
+
+/* Pixel font for headings (mimicking MS Sans Serif) */
+.win-ms-font {
+  font-family: "Tahoma", "MS Sans Serif", "Arial", sans-serif;
+  letter-spacing: 0;
+  text-shadow: none;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiCheckCircle, FiPlay } from 'react-icons/fi';
+import { FiArrowRight, FiCheckCircle } from 'react-icons/fi';
 import { FaHardHat, FaCity, FaCouch, FaHammer } from 'react-icons/fa';
 
 import ServiceCard from '../components/ui/ServiceCard';
@@ -25,304 +24,419 @@ const projectsData = [
   { title: 'Modern Minimalist Barn', category: 'Residential', imageUrl: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop', description: 'Rustic appeal meets modern functionality in this newly renovated barn house.' },
 ];
 
+const WinWindow = ({ title, icon = '♦', children, style = {} }) => (
+  <div className="win-window" style={{ ...style }}>
+    <div className="win-titlebar">
+      <span>{icon} {title}</span>
+      <div>
+        <span className="win-titlebar-btn">_</span>
+        <span className="win-titlebar-btn">□</span>
+        <span className="win-titlebar-btn" style={{ fontWeight: 'bold', color: '#900' }}>✕</span>
+      </div>
+    </div>
+    <div style={{ padding: '8px' }}>
+      {children}
+    </div>
+  </div>
+);
+
 const Home = ({ openBookingModal }) => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, 300]);
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setProgress(87), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="w-full bg-dark">
-      {/* Hero Section */}
-      <section className="relative h-screen w-full flex items-center overflow-hidden">
-        {/* Background Parallax & Zoom */}
-        <motion.div 
-          style={{ y }}
-          className="absolute inset-0 z-0"
-        >
-          {/* Exact multi-step gradient for perfect visibility */}
-          <div 
-            className="absolute inset-0 z-10" 
-            style={{ 
-              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8))' 
-            }} 
-          />
-          <motion.img 
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.05 }}
-            transition={{ 
-              duration: 10, 
-              repeat: Infinity, 
-              repeatType: "reverse", 
-              ease: "linear" 
-            }}
-            src={heroBgUrl} 
-            alt="Construction Excellence" 
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
+    <div
+      style={{
+        fontFamily: '"Tahoma", "Arial", sans-serif',
+        fontSize: '11px',
+        background: '#008080',
+        paddingBottom: '40px',
+        minHeight: '100vh',
+      }}
+    >
+      {/* ===== HERO — Main Window ===== */}
+      <div style={{ padding: '8px' }}>
+        <div className="win-window">
+          <div className="win-titlebar">
+            <span>♦ Diamond Construction — Welcome</span>
+            <div>
+              <span className="win-titlebar-btn">_</span>
+              <span className="win-titlebar-btn">□</span>
+              <span className="win-titlebar-btn" style={{ fontWeight: 'bold', color: '#900' }}>✕</span>
+            </div>
+          </div>
 
-        {/* Hero Content */}
-        <div className="container mx-auto px-6 relative z-20">
-          <div className="max-w-4xl md:text-left text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+          {/* Hero image with IE-style banner */}
+          <div style={{ position: 'relative', overflow: 'hidden' }}>
+            <img
+              src={heroBgUrl}
+              alt="Diamond Construction — Building Excellence"
+              style={{
+                width: '100%',
+                height: '320px',
+                objectFit: 'cover',
+                display: 'block',
+                filter: 'brightness(0.6)',
+              }}
+            />
+            {/* Overlay text — classic centered HTML table layout style */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 0, left: 0, right: 0, bottom: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                padding: '16px',
+              }}
             >
-              <motion.span 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-primary text-sm md:text-base font-bold uppercase tracking-[0.5em] mb-8 block drop-shadow-lg"
+              <p
+                style={{
+                  color: '#ffff00',
+                  fontFamily: 'Tahoma',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                  letterSpacing: '4px',
+                  textTransform: 'uppercase',
+                  marginBottom: '8px',
+                  textShadow: '1px 1px 0 #000',
+                }}
               >
-                Excellence in Construction
-              </motion.span>
-              <h1 
-                className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-8 tracking-tighter leading-none"
-                style={{ textShadow: '0px 2px 8px rgba(0,0,0,0.6)' }}
-              >
-                Build Your <span className="text-primary italic">Legacy</span>
-              </h1>
-              <p 
-                className="text-lg md:text-2xl text-[#d1d5db] max-w-2xl md:mx-0 mx-auto mb-12 leading-relaxed font-light"
-                style={{ textShadow: '0px 2px 8px rgba(0,0,0,0.6)' }}
-              >
-                Diamond Construction elevates the standard of building. We bring your most ambitious architectural visions to life with unmatched precision and transparency.
+                ★ Excellence in Construction ★
               </p>
-              
-              <div className="flex flex-col sm:flex-row items-center md:justify-start justify-center gap-6">
-                <Link 
-                  to="/contact" 
-                  className="w-full sm:w-auto px-10 py-5 rounded-2xl text-lg font-bold flex items-center justify-center gap-3 group transition-all duration-300 shadow-2xl"
-                  style={{ backgroundColor: '#DAA520', color: '#0a0a0a' }}
-                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#B8860B'}
-                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#DAA520'}
+              <h1
+                style={{
+                  color: '#ffffff',
+                  fontFamily: '"Impact", "Arial Black", sans-serif',
+                  fontSize: '48px',
+                  fontWeight: 'bold',
+                  textShadow: '2px 2px 0px #000000, 3px 3px 0px #DAA520',
+                  lineHeight: '1.1',
+                  marginBottom: '12px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Build Your <span style={{ color: '#DAA520' }}>Legacy</span>
+              </h1>
+              <p
+                style={{
+                  color: '#ffffff',
+                  fontFamily: 'Tahoma',
+                  fontSize: '13px',
+                  maxWidth: '600px',
+                  textShadow: '1px 1px 0 #000',
+                  marginBottom: '16px',
+                  lineHeight: '1.5',
+                }}
+              >
+                Diamond Construction elevates the standard of building. We bring your most ambitious
+                architectural visions to life with unmatched precision and transparency.
+              </p>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Link
+                  to="/contact"
+                  className="win-btn-primary"
+                  style={{ textDecoration: 'none', color: '#000', fontSize: '12px' }}
                 >
-                  Start Your Project <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  ► Start Your Project
                 </Link>
-                <button 
+                <button
                   onClick={openBookingModal}
-                  className="w-full sm:w-auto px-10 py-5 rounded-2xl text-lg font-bold text-white border-2 border-white/20 hover:bg-white hover:text-dark backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-3 group"
+                  className="win-btn"
+                  style={{ fontSize: '12px' }}
                 >
-                  <FiPlay className="text-primary group-hover:scale-125 transition-transform" /> Our Process
+                  ▶ Our Process
                 </button>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Animated GIF construction sign (simulated) */}
+            <div
+              className="win-construction-banner"
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: '4px 0',
+              }}
+            >
+              🚧 &nbsp; THIS SITE IS BEST VIEWED IN INTERNET EXPLORER 5.5 AT 1024×768 RESOLUTION &nbsp; 🚧
+            </div>
+          </div>
+
+          {/* Status bar */}
+          <div className="win-statusbar">
+            <div className="win-statusbar-panel">✓ Done</div>
+            <div className="win-statusbar-panel">Internet zone</div>
+            <div style={{ flex: 1 }} />
+            <div className="win-statusbar-panel" style={{ minWidth: '80px' }}>
+              <div className="win-progress" style={{ width: '80px' }}>
+                <div className="win-progress-bar" style={{ width: `${progress}%` }} />
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Scroll Indicator */}
-        <motion.div 
-          animate={{ y: [0, 15, 0], opacity: [0.3, 1, 0.3] }}
-          transition={{ repeat: Infinity, duration: 2.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
-        >
-          <div className="w-8 h-14 rounded-full border-2 border-white/20 flex justify-center p-2 backdrop-blur-md">
-            <motion.div 
-              animate={{ height: ['20%', '60%', '20%'] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-              className="w-1 bg-primary rounded-full" 
-            />
+      {/* ===== Quick Stats ===== */}
+      <div style={{ padding: '0 8px 8px' }}>
+        <WinWindow title="Site Statistics — Diamond Construction" icon="📊">
+          <table className="win-table" style={{ width: '100%' }}>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { metric: 'Years Experience', value: '15+', status: '✓ Active', notes: 'Est. 2009' },
+                { metric: 'Projects Completed', value: '500+', status: '✓ Ongoing', notes: 'Residential & Commercial' },
+                { metric: 'Client Satisfaction', value: '100%', status: '✓ Verified', notes: 'Zero disputes' },
+                { metric: 'Industry Awards', value: '12+', status: '✓ Current', notes: 'Regional & National' },
+              ].map((row, i) => (
+                <tr key={i} style={{ background: i % 2 === 0 ? '#ffffff' : '#f0f0f0' }}>
+                  <td style={{ fontWeight: 'bold', color: '#000080' }}>{row.metric}</td>
+                  <td style={{ fontWeight: 'bold', color: '#DAA520', fontSize: '13px' }}>{row.value}</td>
+                  <td style={{ color: '#008000' }}>{row.status}</td>
+                  <td style={{ color: '#808080' }}>{row.notes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </WinWindow>
+      </div>
+
+      {/* ===== Services Section ===== */}
+      <div style={{ padding: '0 8px 8px' }}>
+        <WinWindow title="Our Services — Select a Category" icon="🔧">
+          <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span className="win-heading">Specialized Services</span>
+            <Link to="/services" className="win-link">
+              View All Services &gt;&gt;
+            </Link>
           </div>
-        </motion.div>
-      </section>
-
-
-      {/* Quick Stats */}
-      <section className="bg-[#080808] border-y border-white/5 py-20 relative z-30">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-             {[
-               { title: '15+', subtitle: 'Years Experience' },
-               { title: '500+', subtitle: 'Projects Done' },
-               { title: '100%', subtitle: 'Client Satisfaction' },
-               { title: '12+', subtitle: 'Industry Awards' },
-             ].map((stat, idx) => (
-               <motion.div 
-                 key={idx}
-                 initial={{ opacity: 0, y: 30 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: idx * 0.1, duration: 0.6 }}
-                 className="text-center group"
-               >
-                 <h3 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-3 group-hover:scale-110 transition-transform duration-500">{stat.title}</h3>
-                 <p className="text-light/40 uppercase tracking-[0.3em] text-[10px] font-bold">{stat.subtitle}</p>
-               </motion.div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-32 bg-dark relative overflow-hidden">
-        <div className="absolute top-1/2 right-0 w-1/3 h-full bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
-        
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="max-w-2xl"
-            >
-              <span className="text-primary text-sm tracking-[0.4em] uppercase font-bold mb-4 block">Expertise</span>
-              <h2 className="text-5xl md:text-7xl font-heading font-bold text-light">Our Specialized Services</h2>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/services" className="text-light/60 hover:text-primary transition-all flex items-center gap-3 font-bold uppercase tracking-widest text-xs group">
-                View All Services <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <hr className="win-divider" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '8px', marginTop: '8px' }}>
             {servicesData.map((service, index) => (
               <ServiceCard key={index} {...service} index={index} />
             ))}
           </div>
-        </div>
-      </section>
+        </WinWindow>
+      </div>
 
-      {/* About / Founder Section */}
-      <section className="py-32 bg-[#090909] border-y border-white/5 relative overflow-hidden">
-        <div className="absolute left-0 top-0 w-full h-full bg-grid-white/[0.02] -z-10" />
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group">
-                <img src={founderImageUrl} alt="Abdul - Founder" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100" />
+      {/* ===== About / Founder Section ===== */}
+      <div style={{ padding: '0 8px 8px' }}>
+        <WinWindow title="About the Founder — Abdul, CEO" icon="👤">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '12px', alignItems: 'start' }}>
+            {/* Founder Image */}
+            <div>
+              <div className="win-inset" style={{ overflow: 'hidden', display: 'inline-block', width: '100%' }}>
+                <img
+                  src={founderImageUrl}
+                  alt="Abdul — Founder & CEO"
+                  style={{ width: '100%', display: 'block', maxHeight: '280px', objectFit: 'cover' }}
+                />
               </div>
-              <div className="absolute -bottom-12 -right-12 bg-dark-card border border-white/10 p-12 rounded-[2rem] shadow-2xl hidden md:block backdrop-blur-xl">
-                <div className="text-center">
-                  <h4 className="text-5xl font-heading font-bold text-primary mb-2">15+</h4>
-                  <p className="text-light/40 text-[10px] uppercase tracking-[0.3em] font-bold">Years of Trust</p>
-                </div>
+              <div
+                className="win-window"
+                style={{ marginTop: '8px', padding: '8px', textAlign: 'center' }}
+              >
+                <span
+                  style={{
+                    fontFamily: '"Impact", Arial',
+                    fontSize: '28px',
+                    color: '#DAA520',
+                    display: 'block',
+                    lineHeight: '1',
+                  }}
+                >
+                  15+
+                </span>
+                <span style={{ fontSize: '10px', color: '#808080', textTransform: 'uppercase', letterSpacing: '2px' }}>
+                  Years of Trust
+                </span>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-primary text-sm tracking-[0.4em] uppercase font-bold mb-4 block">Founders Vision</span>
-              <h2 className="text-5xl md:text-7xl font-heading font-bold text-light mb-10 leading-tight">Driven by Quality,<br/>Defined by Results</h2>
-              <div className="space-y-8 text-light/50 text-lg leading-relaxed mb-12">
-                <p>
-                  Diamond Construction was founded by Abdul with a simple but powerful intention: to move beyond blueprints and build landmarks that stand as a legacy.
-                </p>
-                <p>
-                  Every brick we lay and every structure we design is a commitment to the highest standards of safety, aesthetics, and lasting durability. We don't just build homes; we build the future.
-                </p>
+            {/* Founder Text */}
+            <div>
+              <span className="win-heading" style={{ display: 'block', marginBottom: '4px' }}>
+                Driven by Quality, Defined by Results
+              </span>
+              <hr className="win-divider" />
+              <p style={{ marginTop: '8px', lineHeight: '1.6', color: '#000' }}>
+                Diamond Construction was founded by <strong>Abdul</strong> with a simple but powerful intention: to move beyond blueprints and build landmarks that stand as a legacy.
+              </p>
+              <p style={{ marginTop: '8px', lineHeight: '1.6', color: '#000' }}>
+                Every brick we lay and every structure we design is a commitment to the highest standards of safety, aesthetics, and lasting durability. We don&apos;t just build homes; we build the future.
+              </p>
+
+              <table
+                style={{
+                  marginTop: '12px',
+                  borderCollapse: 'collapse',
+                  width: '100%',
+                }}
+              >
+                <tbody>
+                  {[
+                    ['✓ Unmatched Quality', '✓ On-Time Delivery'],
+                    ['✓ Transparent Pricing', '✓ Licensed & Insured'],
+                  ].map((row, i) => (
+                    <tr key={i}>
+                      {row.map((cell, j) => (
+                        <td
+                          key={j}
+                          style={{
+                            padding: '4px 8px',
+                            border: '1px solid #d4d0c8',
+                            background: i % 2 === 0 ? '#f0f0f0' : '#ffffff',
+                            color: '#000080',
+                            fontWeight: 'bold',
+                          }}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div style={{ marginTop: '16px', borderTop: '1px solid #d4d0c8', paddingTop: '8px' }}>
+                <strong style={{ fontSize: '12px' }}>Abdul</strong>
+                <br />
+                <span style={{ color: '#DAA520', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px' }}>
+                  Founder &amp; CEO
+                </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-                <div className="flex items-center gap-4 bg-dark-card/50 p-6 rounded-2xl border border-white/5 backdrop-blur-sm group hover:border-primary/30 transition-all">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-dark transition-all">
-                    <FiCheckCircle />
-                  </div>
-                  <span className="font-heading font-bold text-light">Unmatched Quality</span>
-                </div>
-                <div className="flex items-center gap-4 bg-dark-card/50 p-6 rounded-2xl border border-white/5 backdrop-blur-sm group hover:border-primary/30 transition-all">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-dark transition-all">
-                    <FiCheckCircle />
-                  </div>
-                  <span className="font-heading font-bold text-light">On-Time Delivery</span>
-                </div>
+              <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                <Link to="/about" className="win-btn" style={{ textDecoration: 'none', color: '#000' }}>
+                  Learn More
+                </Link>
+                <button onClick={openBookingModal} className="win-btn-primary">
+                  Schedule Meeting
+                </button>
               </div>
-
-              <div className="flex items-center gap-8">
-                <div>
-                  <h4 className="text-3xl font-heading font-bold text-light mb-1">Abdul</h4>
-                  <p className="text-primary text-xs uppercase tracking-[0.3em] font-bold">Founder & CEO</p>
-                </div>
-                <div className="h-16 w-px bg-white/10"></div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Signature_of_John_Hancock.svg" alt="Signature" className="h-16 opacity-30 filter invert group-hover:opacity-60 transition-opacity" />
-              </div>
-            </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
+        </WinWindow>
+      </div>
 
-      {/* Projects Gallery */}
-      <section className="py-32 bg-dark">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-             <div className="max-w-2xl">
-               <span className="text-primary text-sm tracking-[0.4em] uppercase font-bold mb-4 block">Portfolio</span>
-               <h2 className="text-5xl md:text-7xl font-heading font-bold text-light">Latest Masterpieces</h2>
-             </div>
-             <Link to="/projects" className="btn-outline px-8 py-4 rounded-xl border-white/10 hover:border-primary transition-all text-sm font-bold uppercase tracking-widest text-light">
-               Explore Gallery
-             </Link>
+      {/* ===== Projects Gallery ===== */}
+      <div style={{ padding: '0 8px 8px' }}>
+        <WinWindow title="Projects Gallery — Latest Masterpieces" icon="🏗️">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <span className="win-heading">Featured Portfolio</span>
+            <Link to="/projects" className="win-link">
+              Explore Full Gallery &gt;&gt;
+            </Link>
           </div>
+          <hr className="win-divider" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Explorer-style file view */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '8px', marginTop: '8px' }}>
             {projectsData.map((project, index) => (
               <ProjectCard key={index} project={project} index={index} />
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Testimonials */}
-      <section className="py-32 bg-[#080808] border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[150px] pointer-events-none"></div>
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-           <div className="text-center mb-20">
-             <span className="text-primary text-sm tracking-[0.4em] uppercase font-bold mb-4 block">Testimonials</span>
-             <h2 className="text-5xl md:text-7xl font-heading font-bold text-light leading-tight">Voices of Excellence</h2>
-           </div>
-           
-           <TestimonialSlider />
-        </div>
-      </section>
+          <div className="win-statusbar" style={{ marginTop: '8px' }}>
+            <div className="win-statusbar-panel">{projectsData.length} object(s)</div>
+            <div className="win-statusbar-panel">4 files shown</div>
+          </div>
+        </WinWindow>
+      </div>
 
-      {/* CTA Section */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-dark z-0" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent z-10 opacity-30" />
-        
-        <div className="container mx-auto px-6 max-w-5xl text-center relative z-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="premium-card p-16 md:p-24 rounded-[4rem] border-white/10 bg-dark-card/30 backdrop-blur-xl group overflow-hidden"
+      {/* ===== Testimonials ===== */}
+      <div style={{ padding: '0 8px 8px' }}>
+        <WinWindow title="Customer Reviews — Voices of Excellence" icon="💬">
+          <div style={{ textAlign: 'center', marginBottom: '4px' }}>
+            <span className="win-heading">What Our Clients Say</span>
+          </div>
+          <hr className="win-divider" />
+          <TestimonialSlider />
+        </WinWindow>
+      </div>
+
+      {/* ===== CTA Section ===== */}
+      <div style={{ padding: '0 8px 8px' }}>
+        <WinWindow title="Ready to Start? — Get a Free Consultation" icon="📞">
+          {/* Dialog-style centered box */}
+          <div
+            className="win-inset"
+            style={{ padding: '24px', textAlign: 'center', background: '#f0f0f0' }}
           >
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-all duration-1000" />
-            
-            <h2 className="text-5xl md:text-7xl font-heading font-bold text-light mb-10 leading-tight">Ready to start your<br/><span className="text-primary">next masterpiece?</span></h2>
-            <p className="text-light/50 text-xl md:text-2xl mb-12 max-w-2xl mx-auto font-light">Join the ranks of visionaries who chose Diamond Construction for their most ambitious projects.</p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link to="/contact" className="px-12 py-6 bg-primary text-dark font-black rounded-3xl hover:scale-105 transition-all shadow-2xl shadow-primary/30 text-lg uppercase tracking-wider">
-                Get a Free Consultation
+            {/* Dialog icon */}
+            <div style={{ fontSize: '40px', marginBottom: '8px' }}>🏗️</div>
+            <h2
+              style={{
+                fontFamily: '"Impact", "Arial Black", sans-serif',
+                fontSize: '22px',
+                color: '#000080',
+                textTransform: 'uppercase',
+                marginBottom: '8px',
+              }}
+            >
+              Ready to Start Your Next Masterpiece?
+            </h2>
+            <p style={{ color: '#000', maxWidth: '480px', margin: '0 auto 16px', lineHeight: '1.6' }}>
+              Join the ranks of visionaries who chose Diamond Construction for their most ambitious projects. Contact us today for a <strong>FREE</strong> consultation.
+            </p>
+            <hr className="win-divider" style={{ maxWidth: '400px', margin: '0 auto 16px' }} />
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link
+                to="/contact"
+                className="win-btn-primary"
+                style={{ textDecoration: 'none', color: '#000', fontSize: '12px', padding: '6px 20px' }}
+              >
+                Get Free Consultation
               </Link>
-              <button 
+              <button
                 onClick={openBookingModal}
-                className="px-12 py-6 bg-dark border border-white/10 text-light font-bold rounded-3xl hover:bg-dark-card hover:border-primary transition-all text-lg uppercase tracking-wider"
+                className="win-btn"
+                style={{ fontSize: '12px', padding: '6px 20px' }}
               >
                 Schedule A Meeting
               </button>
+              <Link
+                to="/contact"
+                className="win-btn"
+                style={{ textDecoration: 'none', color: '#000', fontSize: '12px', padding: '6px 20px' }}
+              >
+                Cancel
+              </Link>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+
+          {/* Footer notice */}
+          <div
+            style={{
+              marginTop: '8px',
+              background: '#ffffcc',
+              border: '1px solid #DAA520',
+              padding: '4px 8px',
+              fontSize: '10px',
+              color: '#000',
+            }}
+          >
+            ⚠️ <strong>Note:</strong> This website is optimized for Internet Explorer 5.5+. Some features may not work in Netscape Navigator.
+          </div>
+        </WinWindow>
+      </div>
     </div>
   );
 };
 
 export default Home;
-

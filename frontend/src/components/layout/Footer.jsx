@@ -3,32 +3,102 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/f
 
 const Footer = () => {
   return (
-    <footer className="bg-[#050505] border-t border-white/5 pt-16 pb-8">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          
+    <footer
+      style={{
+        fontFamily: '"Tahoma", "Arial", sans-serif',
+        fontSize: '11px',
+        marginBottom: '38px', /* above taskbar */
+      }}
+    >
+      {/* Windows-style footer window */}
+      <div
+        style={{
+          background: '#d4d0c8',
+          borderTop: '2px solid #ffffff',
+          borderLeft: '2px solid #ffffff',
+          borderRight: '2px solid #808080',
+          borderBottom: '2px solid #808080',
+          margin: '0 8px 8px',
+          boxShadow: '1px 1px 0 #000',
+        }}
+      >
+        {/* Titlebar */}
+        <div
+          style={{
+            background: 'linear-gradient(to right, #0a246a, #a6caf0)',
+            color: '#fff',
+            fontWeight: 'bold',
+            fontSize: '11px',
+            padding: '3px 6px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <span>♦</span> Diamond Construction — Footer Information
+        </div>
+
+        {/* Content grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+            gap: '8px',
+            padding: '8px',
+          }}
+        >
+          {/* Brand */}
           <div>
-            <Link to="/" className="inline-block mb-6">
-              <span className="text-2xl font-heading font-bold tracking-wider text-light">DIAMOND<span className="text-primary">.</span></span>
-            </Link>
-            <p className="text-light/60 text-sm leading-relaxed mb-6">
-              Building your dreams with precision. We deliver high-quality construction and design services with an unwavering commitment to excellence.
+            <div
+              style={{
+                borderBottom: '1px solid #808080',
+                paddingBottom: '4px',
+                marginBottom: '6px',
+                fontWeight: 'bold',
+                color: '#000080',
+                fontSize: '12px',
+              }}
+            >
+              ♦ DIAMOND<span style={{ color: '#DAA520' }}>.</span>
+            </div>
+            <p style={{ color: '#444', lineHeight: '1.6', marginBottom: '8px' }}>
+              Building your dreams with precision. High-quality construction &amp; design services.
             </p>
-            <div className="flex gap-4">
+            <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
               {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map((Icon, index) => (
-                <a key={index} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-light/80 hover:bg-primary hover:text-dark transition-all duration-300">
-                  <Icon size={18} />
+                <a
+                  key={index}
+                  href="#"
+                  className="win-btn"
+                  style={{ minWidth: 'auto', padding: '2px 6px', fontSize: '10px', textDecoration: 'none', color: '#000' }}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <Icon size={10} />
                 </a>
               ))}
             </div>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-heading font-semibold mb-6">Quick Links</h4>
-            <ul className="flex flex-col gap-3">
+            <div
+              style={{
+                borderBottom: '1px solid #808080',
+                paddingBottom: '4px',
+                marginBottom: '6px',
+                fontWeight: 'bold',
+                color: '#000080',
+              }}
+            >
+              Quick Links
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '2px' }}>
               {['Home', 'About Us', 'Services', 'Projects', 'Contact'].map((item) => (
                 <li key={item}>
-                  <Link to={`/${item === 'Home' ? '' : item.toLowerCase().replace(' ', '-')}`} className="text-light/60 hover:text-primary transition-colors text-sm">
+                  <Link
+                    to={`/${item === 'Home' ? '' : item.toLowerCase().replace(' ', '-')}`}
+                    style={{ color: '#0000ee', textDecoration: 'underline', fontSize: '11px' }}
+                  >
                     {item}
                   </Link>
                 </li>
@@ -36,12 +106,26 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Services */}
           <div>
-            <h4 className="text-lg font-heading font-semibold mb-6">Services</h4>
-            <ul className="flex flex-col gap-3">
+            <div
+              style={{
+                borderBottom: '1px solid #808080',
+                paddingBottom: '4px',
+                marginBottom: '6px',
+                fontWeight: 'bold',
+                color: '#000080',
+              }}
+            >
+              Services
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '2px' }}>
               {['Residential Construction', 'Commercial Projects', 'Interior Design', 'Renovations'].map((item) => (
                 <li key={item}>
-                  <Link to="/services" className="text-light/60 hover:text-primary transition-colors text-sm">
+                  <Link
+                    to="/services"
+                    style={{ color: '#0000ee', textDecoration: 'underline', fontSize: '11px' }}
+                  >
                     {item}
                   </Link>
                 </li>
@@ -49,22 +133,81 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
-            <h4 className="text-lg font-heading font-semibold mb-6">Contact Us</h4>
-            <address className="not-italic flex flex-col gap-4 text-sm text-light/60">
+            <div
+              style={{
+                borderBottom: '1px solid #808080',
+                paddingBottom: '4px',
+                marginBottom: '6px',
+                fontWeight: 'bold',
+                color: '#000080',
+              }}
+            >
+              Contact Us
+            </div>
+            <address
+              style={{
+                fontStyle: 'normal',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                color: '#000',
+                fontSize: '11px',
+              }}
+            >
               <p>📍 Ayya Saami Street,<br />Alandur, Chennai, Tamil Nadu</p>
-              <p>📞 8946074703</p>
-              <p>✉️ abdul@diamondconstruction.com</p>
+              <p>📞 <a href="tel:8946074703" style={{ color: '#0000ee', textDecoration: 'underline' }}>8946074703</a></p>
+              <p>✉️ <a href="mailto:abdul@diamondconstruction.com" style={{ color: '#0000ee', textDecoration: 'underline' }}>abdul@diamondconstruction.com</a></p>
             </address>
           </div>
-
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-light/40">
-          <p>&copy; {new Date().getFullYear()} Diamond Construction. All rights reserved.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <Link to="#" className="hover:text-light transition-colors">Privacy Policy</Link>
-            <Link to="#" className="hover:text-light transition-colors">Terms of Service</Link>
+        {/* Status bar / copyright */}
+        <div
+          style={{
+            background: '#d4d0c8',
+            borderTop: '1px solid #808080',
+            padding: '3px 8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '4px',
+          }}
+        >
+          <div
+            style={{
+              borderTop: '1px solid #808080',
+              borderLeft: '1px solid #808080',
+              borderRight: '1px solid #ffffff',
+              borderBottom: '1px solid #ffffff',
+              padding: '1px 6px',
+              fontSize: '10px',
+              color: '#000',
+            }}
+          >
+            &copy; {new Date().getFullYear()} Diamond Construction. All rights reserved.
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Link to="#" style={{ color: '#0000ee', textDecoration: 'underline', fontSize: '10px' }}>
+              Privacy Policy
+            </Link>
+            <Link to="#" style={{ color: '#0000ee', textDecoration: 'underline', fontSize: '10px' }}>
+              Terms of Service
+            </Link>
+          </div>
+          {/* IE Compatibility badge */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '10px',
+              color: '#808080',
+            }}
+          >
+            <span>🌐</span> Best viewed in IE 5.5 @ 1024×768
           </div>
         </div>
       </div>
