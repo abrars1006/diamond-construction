@@ -1,28 +1,57 @@
-import { motion } from 'framer-motion';
-import { FiArrowRight } from 'react-icons/fi';
-
 const ServiceCard = ({ icon: Icon, title, description, index }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="premium-card p-10 group flex flex-col items-start text-left cursor-pointer bg-dark-card/30 backdrop-blur-sm border border-white/5 hover:border-primary/20 transition-all duration-500 rounded-3xl"
+    <div
+      className="win-window"
+      style={{
+        padding: '0',
+        cursor: 'default',
+      }}
     >
-      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 transition-all duration-500 group-hover:bg-primary group-hover:scale-110 shadow-lg shadow-primary/5">
-        <Icon size={28} className="text-primary transition-colors duration-500 group-hover:text-dark" />
+      {/* Mini title bar */}
+      <div
+        style={{
+          background: '#d4d0c8',
+          borderBottom: '1px solid #808080',
+          padding: '2px 6px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          fontSize: '11px',
+          fontFamily: 'Tahoma',
+          fontWeight: 'bold',
+          color: '#000080',
+        }}
+      >
+        <Icon size={14} style={{ color: '#DAA520' }} />
+        {title}
       </div>
-      <h3 className="text-2xl font-heading font-bold mb-4 text-light group-hover:text-primary transition-colors duration-300">{title}</h3>
-      <p className="text-light/50 text-sm leading-relaxed mb-10 flex-grow leading-relaxed">{description}</p>
-      
-      <div className="flex items-center gap-3 text-primary text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-[-10px] group-hover:translate-x-0">
-        <span>Learn More</span>
-        <FiArrowRight className="text-base" />
+      <div style={{ padding: '8px' }}>
+        <p style={{ fontSize: '11px', color: '#000', lineHeight: '1.6', marginBottom: '8px' }}>
+          {description}
+        </p>
+        <hr
+          style={{
+            border: 'none',
+            borderTop: '1px solid #808080',
+            borderBottom: '1px solid #ffffff',
+            margin: '4px 0',
+          }}
+        />
+        <a
+          href="#"
+          style={{
+            color: '#0000ee',
+            textDecoration: 'underline',
+            fontSize: '11px',
+            fontFamily: 'Tahoma',
+          }}
+          onClick={(e) => e.preventDefault()}
+        >
+          Learn More &gt;&gt;
+        </a>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 export default ServiceCard;
-

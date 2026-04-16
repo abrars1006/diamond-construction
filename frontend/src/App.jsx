@@ -26,7 +26,7 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-grow pt-[80px]">
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home openBookingModal={openBookingModal} />} />
             <Route path="/about" element={<About />} />
@@ -38,10 +38,21 @@ function App() {
         <Footer />
         <WhatsAppButton />
         <BookingModal isOpen={isBookingModalOpen} onClose={closeBookingModal} />
-        <ToastContainer 
-          position="bottom-right" 
-          theme="dark"
-          toastClassName="bg-dark-card border border-white/10 text-light"
+        <ToastContainer
+          position="bottom-right"
+          theme="light"
+          toastStyle={{
+            fontFamily: '"Tahoma", Arial, sans-serif',
+            fontSize: '11px',
+            borderRadius: 0,
+            background: '#d4d0c8',
+            border: '2px solid #ffffff',
+            borderRight: '2px solid #808080',
+            borderBottom: '2px solid #808080',
+            color: '#000',
+            boxShadow: '1px 1px 0 #000',
+          }}
+          style={{ bottom: '38px' }}
         />
       </div>
     </Router>

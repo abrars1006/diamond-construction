@@ -1,41 +1,82 @@
-import { motion } from 'framer-motion';
-import { FiArrowUpRight } from 'react-icons/fi';
-
 const ProjectCard = ({ project, index }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.15 }}
-      className="group relative overflow-hidden rounded-[2rem] aspect-[4/5] md:aspect-square cursor-pointer bg-dark-card border border-white/5 hover:border-primary/20 transition-all duration-700"
+    <div
+      className="win-window"
+      style={{ cursor: 'default', overflow: 'hidden' }}
     >
-      <img 
-        src={project.imageUrl} 
-        alt={project.title} 
-        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
-      />
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-all duration-700 flex flex-col justify-end p-8 md:p-10">
-        <div className="translate-y-6 group-hover:translate-y-0 transition-transform duration-700">
-          <div className="flex justify-between items-end mb-4">
-            <span className="text-primary text-[10px] font-bold tracking-[0.3em] uppercase">
-              {project.category}
-            </span>
-            <div className="w-12 h-12 bg-primary/10 backdrop-blur-md rounded-full flex items-center justify-center text-primary border border-white/10 opacity-0 group-hover:opacity-100 transition-all scale-50 group-hover:scale-100 duration-700">
-               <FiArrowUpRight size={20} />
-            </div>
-          </div>
-          <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4 leading-tight">{project.title}</h3>
-          <p className="text-light/50 text-base line-clamp-2 opacity-0 group-hover:opacity-100 transition-all delay-100 duration-700 transform translate-y-4 group-hover:translate-y-0">
-            {project.description}
-          </p>
-        </div>
+      {/* Image thumbnail with IE-style border */}
+      <div className="win-inset" style={{ overflow: 'hidden', lineHeight: 0 }}>
+        <img
+          src={project.imageUrl}
+          alt={project.title}
+          style={{
+            width: '100%',
+            height: '160px',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+        />
       </div>
-    </motion.div>
+
+      {/* File info panel */}
+      <div style={{ padding: '6px 8px', background: '#d4d0c8' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '2px',
+          }}
+        >
+          <strong
+            style={{
+              fontSize: '11px',
+              fontFamily: 'Tahoma',
+              color: '#000080',
+              fontWeight: 'bold',
+            }}
+          >
+            {project.title}
+          </strong>
+          <span
+            style={{
+              background: '#000080',
+              color: '#ffffff',
+              fontSize: '9px',
+              fontFamily: 'Tahoma',
+              padding: '0 4px',
+              lineHeight: '14px',
+            }}
+          >
+            {project.category}
+          </span>
+        </div>
+        <p style={{ fontSize: '10px', color: '#444', lineHeight: '1.4', margin: '0 0 4px' }}>
+          {project.description}
+        </p>
+        <hr
+          style={{
+            border: 'none',
+            borderTop: '1px solid #808080',
+            borderBottom: '1px solid #ffffff',
+            margin: '4px 0',
+          }}
+        />
+        <a
+          href="#"
+          style={{
+            color: '#0000ee',
+            textDecoration: 'underline',
+            fontSize: '10px',
+            fontFamily: 'Tahoma',
+          }}
+          onClick={(e) => e.preventDefault()}
+        >
+          View Project Details &gt;&gt;
+        </a>
+      </div>
+    </div>
   );
 };
 
 export default ProjectCard;
-
